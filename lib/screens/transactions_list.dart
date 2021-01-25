@@ -32,17 +32,18 @@ class TransactionsList extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final Transaction transaction = transactions[index];
                       return Card(
-                        child: ListTile( 
-                          leading: Icon(Icons.monetization_on),
+                        color: Color.fromRGBO(220, 228, 239, 1),
+                        child: ListTile(
+                          leading: Icon(Icons.monetization_on, color: Colors.green,),
                           title: Text(
-                            transaction.value.toString(),
+                            'R\$: ' + transaction.value.toString(),
                             style: TextStyle(
                               fontSize: 24.0,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           subtitle: Text(
-                            transaction.contact.accountNumber.toString(),
+                            'Conta: '+ transaction.contact.accountNumber.toString(),
                             style: TextStyle(
                               fontSize: 16.0,
                             ),

@@ -26,6 +26,14 @@ class Progress extends StatelessWidget {
 }
 
 class ProgressView extends StatelessWidget{
+  String message;
+
+
+  ProgressView({String message = 'Sending...'}){
+    this.message = message;
+  }
+ 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +42,7 @@ class ProgressView extends StatelessWidget{
       ),
       body:
       Progress(
-         message : 'Sending...',
+         message : message,
       ),
     );
   }

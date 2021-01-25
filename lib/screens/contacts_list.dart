@@ -127,8 +127,13 @@ class _ContectItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Color.fromRGBO(220, 228, 239, 1),
       child: ListTile(
         onTap: () => onClick(),
+        leading: Icon(
+          Icons.people_outline,
+          color: Color.fromRGBO(25, 39, 58, 1),
+        ),
         title: Text(
           contact.name,
           style: TextStyle(fontSize: 26.0),

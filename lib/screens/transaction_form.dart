@@ -125,9 +125,9 @@ class TransactionFormStateless extends StatelessWidget {
   }
 
   void _showFailureMessage(
-      BuildContext context, {
-        String message = 'Unknown error',
-      }) {
+    BuildContext context, {
+    String message = 'Unknown error',
+  }) {
     showDialog(
         context: context,
         builder: (contextDialog) {
@@ -149,68 +149,122 @@ class _BasicForm extends StatelessWidget {
       appBar: AppBar(
         title: Text('New transaction'),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                _contact.name,
-                style: TextStyle(
-                  fontSize: 24.0,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: Text(
-                  _contact.accountNumber.toString(),
-                  style: TextStyle(
-                    fontSize: 32.0,
-                    fontWeight: FontWeight.bold,
+      body: Container(
+        color: Color.fromRGBO(220, 228, 239, 1),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Container(
+              //color: Colors.grey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    ///color: Colors.orangeAccent,
+                    width: 400,
+
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Column(children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 15.0),
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              'Detalhes do contato',
+                              style: TextStyle(
+                                fontSize: 24.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            'Nome : ' + _contact.name,
+                            style: TextStyle(
+                              fontSize: 18.0,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 2.0),
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              'Conta : ' + _contact.accountNumber.toString(),
+                              style: TextStyle(
+                                fontSize: 18.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            'Banco : Viacred',
+                            style: TextStyle(
+                              fontSize: 18.0,
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            'Telefone : (55)45 3699-8855',
+                            style: TextStyle(
+                              fontSize: 18.0,
+                            ),
+                          ),
+                        ),
+                      ]),
+                    ),
                   ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: TextField(
-                  controller: _valueController,
-                  style: TextStyle(fontSize: 24.0),
-                  decoration: InputDecoration(labelText: 'Value'),
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: SizedBox(
-                  width: double.maxFinite,
-                  child: RaisedButton(
-                    child: Text('Transfer'),
-                    onPressed: () {
-                      final double value =
-                          double.tryParse(_valueController.text);
-                      final transactionCreated = Transaction(
-                        transactionId,
-                        value,
-                        _contact,
-                      );
-                      showDialog(
-                          context: context,
-                          builder: (contextDialog) {
-                            return TransactionAuthDialog(
-                              onConfirm: (String password) {
-                                //TODO: executar o envio !
-                                BlocProvider.of<TransactionFormCubit>(context)
-                                    .save(
-                                        transactionCreated, password, context);
-                              },
-                            );
-                          });
-                    },
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16.0),
+                    child: TextField(
+                      controller: _valueController,
+                      style: TextStyle(fontSize: 24.0),
+                      decoration: InputDecoration(labelText: 'Value'),
+                      keyboardType:
+                          TextInputType.numberWithOptions(decimal: true),
+                    ),
                   ),
-                ),
-              )
-            ],
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16.0),
+                    child: SizedBox(
+                      width: double.maxFinite,
+                      child: RaisedButton(
+                        child: Text('Transfer'),
+                        onPressed: () {
+                          final double value =
+                              double.tryParse(_valueController.text);
+                          final transactionCreated = Transaction(
+                            transactionId,
+                            value,
+                            _contact,
+                          );
+                          showDialog(
+                              context: context,
+                              builder: (contextDialog) {
+                                return TransactionAuthDialog(
+                                  onConfirm: (String password) {
+                                    //TODO: executar o envio !
+                                    BlocProvider.of<TransactionFormCubit>(
+                                            context)
+                                        .save(transactionCreated, password,
+                                            context);
+                                  },
+                                );
+                              });
+                        },
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
           ),
         ),
       ),
